@@ -16,11 +16,11 @@
 </p>
 
 
-In the root directory
-
 <h3>Установка</h3>
-Install dependencies: <h4>npm install</h4>
 
-In the ios directory
-Install Pods: <h4>pod install</h4>
+В корневом каталоге
+Установка зависимостей: <h4>npm install</h4>
+
+В каталоге ios
+Установка Pods: <h4>pod install</h4>
 
