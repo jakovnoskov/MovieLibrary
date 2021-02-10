@@ -20,10 +20,10 @@ const filmList = `https://ghibliapi.herokuapp.com/films/`
 
 const FilmList = () => {
 
+    const selectedFilmItem = useSelector((state: RootState) => state["films"].selectedFilmItem)
     const menuData = useSelector((state: RootState) => state["films"].menuData)
     const favoritesList = useSelector((state: RootState) => state["favorites"].favoritesList)
     const [loading, setLoading] = useState(false)
-    const [overlay, setOverlay] = useState(false)
 
     const sheetRef: any = React.useRef(null)
 
@@ -51,12 +51,6 @@ const FilmList = () => {
     const selectItem = ({ item }: any) => {
         dispatch(setSelectedFilmItem(item))
         sheetRef.current.snapTo(0)
-        setOverlay(true)
-    }
-
-    const closeModal = () => {
-        setOverlay(false)
-        sheetRef.current.snapTo(1)
     }
 
     const loadData = async ({ setMenuData, setLoading, }: any) => {
@@ -80,17 +74,11 @@ const FilmList = () => {
         }))
     }
 
-    useEffect(() => {
-        loadData({
-            dispatch,
-            setMenuData,
-            setLoading,
-        })
-    }, [])
+    useEffect(() => { loadData({ dispatch, setMenuData, setLoading, }) }, [])
 
     return (
         <>
-            <SafeAreaView style={{ backgroundColor: '#fff', position: 'relative' }}>
+            <SafeAreaView style={{ backgroundColor: '#fff' }}>
                 <FlatList
                     data={menuData}
                     contentContainerStyle={styles.sListBox}
@@ -112,20 +100,14 @@ const FilmList = () => {
                     keyExtractor={(item: any) => "item_" + item.id.toString()}
                     ListFooterComponent={() => loading ? <View style={styles.srBox}><ActivityIndicator size="large" /></View> : null}
                 />
-                <TouchableOpacity
-                    activeOpacity={.7}
-                    onPress={() => closeModal()}
-                    style={[styles.overlay, overlay ? styles.overlayShow : styles.overlayHide]}
-                />
             </SafeAreaView>
-
             <BottomSheet
                 ref={sheetRef}
-                onCloseStart={() => closeModal()}
-                renderContent={() => <ModalContent />}
-                snapPoints={['70%', 0]}
+                renderContent={() => <ModalContent item={selectedFilmItem}/>}
+                snapPoints={['80%', 0]}
                 initialSnap={1}
             />
+
         </>
     )
 }

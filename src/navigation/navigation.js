@@ -22,11 +22,11 @@ const HomeStack = createStackNavigator();
 
 function MovieListStack() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
       <HomeStack.Screen
         options={{
           title: 'Cписок фильмов',
-          headerTitleStyle: { color: '#fff' },
+          headerTitleStyle: { color: '#fff', textAlign:'center' },
           headerBackground: () => <GradientBackground/>,
         }}
         name="MovieList" component={Containers.FilmList} />
@@ -40,7 +40,7 @@ function FavoritesListStack() {
       <HomeStack.Screen
         options={{
           title: 'Избранное',
-          headerTitleStyle: { color: '#fff' },
+          headerTitleStyle: { color: '#fff', textAlign:'center' },
           headerBackground: () => <GradientBackground/>,
         }}
         name="MovieList" component={Containers.FavoritesList} />
@@ -54,7 +54,7 @@ function AboutStack() {
       <HomeStack.Screen
         options={{
           title: 'О приложении',
-          headerTitleStyle: { color: '#fff' },
+          headerTitleStyle: { color: '#fff', textAlign:'center' },
           headerBackground: () => <GradientBackground/>,
         }}
         name="MovieList" component={Containers.About} />
@@ -69,13 +69,14 @@ function MyTabs() {
       tabBarOptions={{
         activeTintColor: '#64d7a0',
         inactiveTintColor: '#9ca7b3',
+        tabStyle:{paddingBottom:5}
       }}
     >
       <Tab.Screen
         name="MovieList"
         component={MovieListStack}
         options={{
-          tabBarLabel: 'Cписок фильмов',
+          tabBarLabel: 'Фильмы',
           tabBarIcon: ({ color, size }) => (
             <Icon name={'movie-roll'} size={size} color={color} />
           ),

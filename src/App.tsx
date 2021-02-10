@@ -12,11 +12,13 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import AppContainer from './navigation/navigation'
 import store from './redux/store'
+import { StatusBar} from 'react-native'
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <StatusBar translucent backgroundColor="transparent" />
         <AppContainer />
       </Provider>
     )

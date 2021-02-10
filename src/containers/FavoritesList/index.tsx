@@ -10,23 +10,19 @@ import styles from './styles'
 import Item from '../../components/item'
 import ModalContent from '../../components/modals/modalContent'
 import { setMenuData } from '../../redux/actions/films'
-import { setSelectedFilmItem } from '../../redux/actions/films'
 import { setFavoritesList } from '../../redux/actions/favorites'
+import { setSelectedFavoritesItem } from '../../redux/actions/favorites'
 import { RootState } from '../../redux/store/'
 import BottomSheet from 'reanimated-bottom-sheet'
 
-
-
 const FavoritesList = () => {
 
-
+    const selectedFavoritesItem = useSelector((state: RootState) => state["favorites"].selectedFavoritesItem)
     const menuData = useSelector((state: RootState) => state["films"].menuData)
     const favoritesList = useSelector((state: RootState) => state["favorites"].favoritesList)
     const flatListRef: any = React.useRef()
     const sheetRef: any = React.useRef(null)
     const [loading, setLoading] = useState(false)
-
-    const [overlay, setOverlay] = useState(false)
 
 
     const dispatch = useDispatch()
@@ -49,21 +45,11 @@ const FavoritesList = () => {
     }
 
     const selectItem = ({ item }: any) => {
-        dispatch(setSelectedFilmItem(item))
+        dispatch(setSelectedFavoritesItem(item))
         sheetRef.current.snapTo(0)
-        setOverlay(true)
     }
 
-    const closeModal = () => {
-        setOverlay(false)
-        sheetRef.current.snapTo(1)
-    }
-
-    const toTop = () => {
-        flatListRef.current.scrollToOffset({ animated: true, offset: 0 })
-    }
-
-
+    const toTop = () => flatListRef.current.scrollToOffset({ animated: true, offset: 0 })
 
     return (
         <>
@@ -90,18 +76,11 @@ const FavoritesList = () => {
                     keyExtractor={(item: any) => "item_" + item.id.toString()}
                     ListFooterComponent={() => loading ? <View style={styles.srBox}><ActivityIndicator size="large" /></View> : null}
                 />
-                <TouchableOpacity
-                    activeOpacity={.7}
-                    onPress={() => closeModal()}
-                    style={[styles.overlay, overlay ? styles.overlayShow : styles.overlayHide]}
-                />
-
             </SafeAreaView>
             <BottomSheet
                 ref={sheetRef}
-                onCloseStart={() => closeModal()}
-                renderContent={() => <ModalContent />}
-                snapPoints={['70%', 0]}
+                renderContent={() => <ModalContent item={selectedFavoritesItem} />}
+                snapPoints={['80%', 0]}
                 initialSnap={1}
             />
         </>

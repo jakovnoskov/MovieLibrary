@@ -1,8 +1,8 @@
 const styles = {
   listItem: {
     height: '100%',
-    paddingBottom: 25,
-    paddingHorizontal: 25,
+    paddingBottom: 15,
+    paddingHorizontal: 15,
     backgroundColor: '#fff',
     //paddingTop: 20,
     borderTopLeftRadius: 20,
@@ -42,12 +42,11 @@ const styles = {
   },
 
   descriptionBox: {
-    paddingTop:20,
-    paddingRight: '10%'
+    paddingTop:10,
   },
 
   desc: {
-    fontSize: 17,
+    fontSize: 15,
     borderColor: '#0002',
   },
 
@@ -57,7 +56,6 @@ const styles = {
     fontWeight: '600',
     borderColor: '#0007',
     paddingBottom: 5,
-    paddingRight: '30%'
   },
 
   
@@ -67,16 +65,16 @@ const styles = {
   },
 
   scoreBox: {
-    width: '100%',
-    height: 200,
+    width: 80,
+    height: 80,
     borderRadius: 7,
     alignContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
+    //alignSelf: 'center',
     justifyContent: 'center',
   },
   score: {
-    fontSize: 160,
+    fontSize: 30,
     fontWeight: '600',
     color: '#fff'
   },
@@ -99,15 +97,24 @@ const styles = {
     backgroundColor: '#00000040',
   },
   develloperBox:{
-    paddingTop:20,
+    flexDirection:'row',
+    paddingTop:10
   },
+  leftSide:{
+    //flex:1,
+    paddingRight:20
+  },
+  rightSide:{
+    flex:1,
+  },
+
   devValue:{
     fontSize: 16,
     color: '#000',
     fontWeight: '600',
   },
   devTitle:{
-    marginTop:2,
+    marginBottom:2,
     fontSize: 14,
     color: '#a0a0a0',
   }
